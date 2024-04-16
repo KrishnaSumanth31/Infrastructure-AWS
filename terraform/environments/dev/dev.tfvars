@@ -5,4 +5,4 @@ bucket_name_second = [
   "mysamplebucketdemo",
 ]
 
-region = "us-east1"
+region = "us-east-1"
