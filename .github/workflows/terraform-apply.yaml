@@ -48,7 +48,7 @@ jobs:
       run: |
         pwd
         cd terraform/environments/dev 
-        terraform plan -out=tfplan
+        terraform plan -var-file= 'terraform/environments/dev/dev.tfvars' -out=dev.tfplan
 
     - name: Terraform Apply
       run: |
