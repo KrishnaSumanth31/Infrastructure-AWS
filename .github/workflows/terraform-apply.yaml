@@ -3,7 +3,7 @@ name: Terraform Deploy
 on:
   push:
     branches:
-      - develop
+      - main
       - test
       - uat
       - prod
@@ -11,7 +11,7 @@ on:
 jobs:
   deploy_dev:
     name: Deploy to Dev
-    if: github.ref == 'refs/heads/develop'
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
@@ -89,7 +89,7 @@ jobs:
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        aws-region: <your-aws-region>
+        aws-region: us-east-1
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
