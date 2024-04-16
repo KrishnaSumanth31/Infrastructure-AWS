@@ -48,7 +48,7 @@ jobs:
       run: |
         pwd
         cd terraform/environments/dev 
-        terraform plan -out=tfplan terraform/environments/dev
+        terraform plan -out=tfplan
 
     - name: Terraform Apply
       run: |
