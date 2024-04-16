@@ -64,7 +64,7 @@ jobs:
         terraform_version: 1.1.0
 
     - name: Terraform Init
-      run: terraform init infra/environments/test
+      run: terraform init \ infra/environments/test
 
     - name: Terraform Validate
       run: terraform validate infra/environments/test
