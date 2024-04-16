@@ -1,0 +1,90 @@
+name: Terraform Deploy
+
+on:
+  push:
+    branches:
+      - develop
+      - test
+      - uat
+      - main
+
+jobs:
+  deploy_dev:
+    name: Deploy to Dev
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.1.0
+
+    - name: Terraform Init
+      run: terraform init infra/environments/dev
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve infra/environments/dev
+
+  deploy_test:
+    name: Deploy to Test
+    if: github.ref == 'refs/heads/test'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.1.0
+
+    - name: Terraform Init
+      run: terraform init infra/environments/test
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve infra/environments/test
+
+  deploy_uat:
+    name: Deploy to UAT
+    if: github.ref == 'refs/heads/uat'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.1.0
+
+    - name: Terraform Init
+      run: terraform init infra/environments/uat
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve infra/environments/uat
+
+  deploy_prod:
+    name: Deploy to Prod
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: 1.1.0
+
+    - name: Terraform Init
+      run: terraform init infra/environments/prod
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve infra/environments/prod
