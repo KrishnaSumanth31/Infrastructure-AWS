@@ -6,7 +6,7 @@ on:
       - develop
       - test
       - uat
-      - main
+      - prod
 
 jobs:
   deploy_dev:
