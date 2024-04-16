@@ -18,6 +18,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: <your-aws-region>
+
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:
@@ -26,8 +33,14 @@ jobs:
     - name: Terraform Init
       run: terraform init infra/environments/dev
 
+    - name: Terraform Validate
+      run: terraform validate infra/environments/dev
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan infra/environments/dev
+
     - name: Terraform Apply
-      run: terraform apply -auto-approve infra/environments/dev
+      run: terraform apply -auto-approve tfplan
 
   deploy_test:
     name: Deploy to Test
@@ -38,6 +51,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: <your-aws-region>
+
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:
@@ -46,8 +66,14 @@ jobs:
     - name: Terraform Init
       run: terraform init infra/environments/test
 
+    - name: Terraform Validate
+      run: terraform validate infra/environments/test
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan infra/environments/test
+
     - name: Terraform Apply
-      run: terraform apply -auto-approve infra/environments/test
+      run: terraform apply -auto-approve tfplan
 
   deploy_uat:
     name: Deploy to UAT
@@ -58,6 +84,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: <your-aws-region>
+
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:
@@ -66,8 +99,14 @@ jobs:
     - name: Terraform Init
       run: terraform init infra/environments/uat
 
+    - name: Terraform Validate
+      run: terraform validate infra/environments/uat
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan infra/environments/uat
+
     - name: Terraform Apply
-      run: terraform apply -auto-approve infra/environments/uat
+      run: terraform apply -auto-approve tfplan
 
   deploy_prod:
     name: Deploy to Prod
@@ -78,6 +117,13 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: <your-aws-region>
+
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
       with:
@@ -86,5 +132,11 @@ jobs:
     - name: Terraform Init
       run: terraform init infra/environments/prod
 
+    - name: Terraform Validate
+      run: terraform validate infra/environments/prod
+
+    - name: Terraform Plan
+      run: terraform plan -out=tfplan infra/environments/prod
+
     - name: Terraform Apply
-      run: terraform apply -auto-approve infra/environments/prod
+      run: terraform apply -auto-approve tfplan
