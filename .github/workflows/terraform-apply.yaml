@@ -45,7 +45,10 @@ jobs:
         terraform validate
 
     - name: Terraform Plan
-      run: terraform plan -out=tfplan terraform/environments/dev
+      run: |
+        pwd
+        cd terraform/environments/dev 
+        terraform plan -out=tfplan terraform/environments/dev
 
     - name: Terraform Apply
       run: |
