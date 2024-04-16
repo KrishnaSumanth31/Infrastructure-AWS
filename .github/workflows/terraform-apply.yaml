@@ -53,7 +53,7 @@ jobs:
     - name: Terraform Apply
       run: |
        cd terraform/environments/dev
-       terraform apply -auto-approve tfplan
+       terraform apply -auto-approve dev.tfplan
 
   deploy_test:
     name: Deploy to Test
