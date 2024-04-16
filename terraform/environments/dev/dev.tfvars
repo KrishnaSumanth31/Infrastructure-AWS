@@ -1,2 +1,8 @@
-bucket_name = "my-sample-bucket"
-region = "us-west-1"
+bucket_name_first = [
+  "mysamplebucket",
+]
+bucket_name_second = [
+  "mysamplebucketdemo",
+]
+
+region = "us-east1"
