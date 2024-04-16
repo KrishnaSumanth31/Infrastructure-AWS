@@ -1,4 +1,4 @@
-bucket_name_first = "mysamplebucket"
-bucket_name_second = "mysamplebucketdemo"
+bucket_name_first = "mysamplebuckethello"
+bucket_name_second = "mysamplebucketdemobye"
 
 region = "eu-west-2"
