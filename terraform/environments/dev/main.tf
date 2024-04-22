@@ -19,7 +19,6 @@ module "postgres" {
   seconds_until_auto_pause       = var.seconds_until_auto_pause
   timeout_action                 = var.timeout_action
   count                  = var.instance_count
-  cluster_identifier     = aws_rds_cluster.my_cluster.id
   instance_class         = var.instance_class
   identifier             = "${var.cluster_identifier}-instance-${count.index + 1}"
   tags = var.tags
