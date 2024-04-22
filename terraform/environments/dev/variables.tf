@@ -47,6 +47,17 @@ variable "timeout_action" {
   description = "The action to take when the Aurora serverless cluster is paused"
 }
 
+variable "instance_count" {
+  description = "Number of instances in the cluster"
+  type        = number
+  default     = 1
+}
+
+variable "instance_class" {
+  description = "Instance class for the cluster instances"
+  default     = "db.t3.small"
+}
+
 variable "tags" {
   description = "Tags for the cluster"
   type        = map(string)
