@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 module "postgres" {
-  source = "../../modules/psotgres"
+  source = "../../modules/postgres"
 
   engine                       = "aurora-postgresql"
   engine_mode                  = "serverless"
