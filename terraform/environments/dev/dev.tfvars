@@ -1,4 +1,16 @@
-bucket_name_first = "mysamplebuckethello"
-bucket_name_second = "mysamplebucketdemobye"
-
-region = "eu-west-2"
+region                         = "us-west-2"
+cluster_identifier             = "my-aurora-cluster"
+database_name                  = "my_database"
+master_username                = "admin"
+master_password                = "password123"
+security_group_id              = "sg-02c1d797ff61ee894"  # Replace with your security group ID
+db_subnet_group_name           = "my-db-subnet-group"
+auto_pause                     = true
+min_capacity                   = 1
+max_capacity                   = 16
+seconds_until_auto_pause       = 300
+timeout_action                 = "ForceApplyCapacityChange"
+tags = {
+  Environment = "dev"
+  Name        = "my-aurora-cluster"
+}
