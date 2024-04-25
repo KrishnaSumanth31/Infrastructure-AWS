@@ -1,3 +1,7 @@
+provider "aws" {
+  region = var.region
+}
+
 resource "aws_s3_bucket" "artifact_bucket" {
   bucket_name = var.bucket_name_artifact
   acl    = "private"
