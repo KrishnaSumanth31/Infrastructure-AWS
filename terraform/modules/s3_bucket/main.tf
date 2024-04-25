@@ -1,15 +1,15 @@
-resource "aws_s3_bucket" "artifact-bucket" {
+resource "aws_s3_bucket" "artifact_bucket" {
   bucket = var.bucket_name_artifact
-  acl = "private"
+  acl    = "private"
+
   versioning {
     enabled = true
   }
 }
 
-resource "aws_s3_bucket" "raw-bucket" {
-
+resource "aws_s3_bucket" "raw_bucket" {
   bucket = var.bucket_name_raw
-  acl = "private"
+  acl    = "private"
 
   lifecycle_rule {
     enabled = true
@@ -33,7 +33,8 @@ resource "aws_s3_bucket" "raw-bucket" {
       days = 365
     }
   }
- object_lock_configuration {
+
+  object_lock_configuration {
     object_lock_enabled = "Enabled"
   }
 }
