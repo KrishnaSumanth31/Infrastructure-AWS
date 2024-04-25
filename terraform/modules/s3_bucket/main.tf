@@ -20,7 +20,7 @@ resource "aws_s3_bucket" "raw_bucket" {
 
     transition {
       days          = 30
-      storage_class = "INTELLIGENT_TIERING"
+      storage_class = "STANDARD_IA"
     }
 
     transition {
@@ -28,9 +28,9 @@ resource "aws_s3_bucket" "raw_bucket" {
       storage_class = "GLACIER"
     }
 
-    noncurrent_version_transition {
+    transition {
       days          = 90
-      storage_class = "GLACIER"
+      storage_class = "DEEP_ARCHIVE"
     }
 
     expiration {
