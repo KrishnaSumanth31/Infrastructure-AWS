@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_s3_bucket" "artifact_bucket" {
-  bucket_name = var.bucket_name_artifact
+  bucket = var.bucket_name_artifact
   acl    = "private"
 
   versioning {
@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "artifact_bucket" {
 }
 
 resource "aws_s3_bucket" "raw_bucket" {
-  bucket_name = var.bucket_name_raw
+  bucket = var.bucket_name_raw
   acl    = "private"
 
   lifecycle_rule {
