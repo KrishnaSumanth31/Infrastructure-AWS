@@ -1,9 +1,14 @@
+variable "region" {
+  description = "The AWS region"
+  type        = string
+}
+
 variable "bucket_name_artifact" {
-  type = string
-  description = "Name of the first s3 Bucketb"
-}  
+  description = "The name of the artifact bucket"
+  type        = string
+}
 
 variable "bucket_name_raw" {
-  type = string
-  description = "Name of the second s3 Bucketb"
+  description = "The name of the raw bucket"
+  type        = string
 }
