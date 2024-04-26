@@ -8,7 +8,6 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   master_password           = "password"
   skip_final_snapshot       = true
   deletion_protection       = false
-  region                    = var.region
   
   scaling_configuration {
     auto_pause               = true
