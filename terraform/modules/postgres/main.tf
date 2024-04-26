@@ -15,8 +15,7 @@
 #}
 
 
-------------------------------------------------------------------------
-
+#------------------------------------------------------------------------
 resource "aws_rds_cluster_instance" "postgresql_serverless" {
   cluster_identifier             = var.cluster_id
   instance_identifier            = "${var.cluster_id}-instance"
