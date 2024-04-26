@@ -12,3 +12,11 @@ variable "bucket_name_raw" {
   description = "The name of the raw bucket"
   type        = string
 }
+
+variable "environment" {
+  description = "The environment name"
+}
+
+variable "cluster_id" {
+  description = "The identifier for the DB cluster"
+}
