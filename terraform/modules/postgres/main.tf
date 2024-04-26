@@ -4,8 +4,8 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   engine_mode               = "provisioned"
   engine_version            = "15.2"
   database_name             = "testdatabaseinfra"
-  master_username           = "admin"
-  master_password           = "password"
+  master_username           = "mydb"
+  master_password           = "testmedude"
   skip_final_snapshot       = true
   deletion_protection       = false
 
