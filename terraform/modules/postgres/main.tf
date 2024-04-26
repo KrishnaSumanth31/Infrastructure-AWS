@@ -35,7 +35,7 @@ resource "aws_rds_cluster" "postgresql_serverless" {
 }
 
 resource "aws_rds_cluster_instance" "postgresql_instance" {
-  count                          = var.instance_count
+  count                          = "1"
   identifier                     = "${var.cluster_id}-instance-${count.index}"
   cluster_identifier             = aws_rds_cluster.postgresql_serverless.id
   instance_class                 = "db.r5.large"  # Adjust instance class as per your requirements
