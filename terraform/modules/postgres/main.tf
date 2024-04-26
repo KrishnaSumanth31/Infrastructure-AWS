@@ -31,10 +31,11 @@ resource "aws_rds_cluster_instance" "postgresql_serverless" {
   db_parameter_group_name        = "aurora-postgresql-parameters"
 
   # Specify existing VPC and subnets
-  vpc_security_group_ids         = "sg-005e6c9357838f2e7"
-  subnet_ids                     = "subnet-0ed4bf4f84fd76a0f"
+  vpc_security_group_ids         = ["sg-005e6c9357838f2e7"]
+  subnet_ids                     = ["subnet-0ed4bf4f84fd76a0f"]
   
   tags                           = { Environment = var.environment }
 }
+
 
 
