@@ -9,13 +9,15 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   skip_final_snapshot       = true
   deletion_protection       = false
   region                    = var.region
+  
   scaling_configuration {
-    auto_pause = var.auto_pause
-    max_capacity = var.max_capacity
-    min_capacity = var.min_capacity
-    seconds_until_auto_pause = var.seconds_until_auto_pause
+    auto_pause               = true
+    max_capacity             = 8
+    min_capacity             = 2
+    seconds_until_auto_pause = 300
+    timeout_action           = "ForceApplyCapacityChange"
   }
+  
   tags = {
     Environment = var.environment
   }
-}
