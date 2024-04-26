@@ -19,7 +19,7 @@
 resource "aws_rds_cluster" "postgresql_serverless" {
   cluster_identifier             = var.cluster_id
   engine                         = "aurora-postgresql"
-  engine_mode                    = "serverless"
+  engine_mode                    = "provisioned"
   engine_version                 = "15.2"  # Adjust engine version as per your requirements
   database_name                  = "testdatabaseinfra"
   master_username                = "mydb"
