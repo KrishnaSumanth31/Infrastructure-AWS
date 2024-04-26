@@ -26,7 +26,7 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   master_password                = "testmedude"
 
   # Serverless V2 configuration
-  db_subnet_group_name           = "rdsgroup"
+  db_subnet_group_name           = "default"
 
   # Specify existing VPC and subnets
   vpc_security_group_ids         = ["sg-005e6c9357838f2e7"]
