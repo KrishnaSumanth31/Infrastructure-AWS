@@ -21,3 +21,4 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   tags = {
     Environment = var.environment
   }
+}
