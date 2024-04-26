@@ -3,7 +3,7 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   engine                    = "aurora-postgresql"
   engine_mode               = "provisioned"
   engine_version            = "15.2"
-  database_name             = "test-database"
+  database_name             = "testdatabaseinfra"
   master_username           = "admin"
   master_password           = "password"
   skip_final_snapshot       = true
