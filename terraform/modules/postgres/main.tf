@@ -8,12 +8,15 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   master_password           = "password"
   skip_final_snapshot       = true
   deletion_protection       = false
-  
-  serverlessv2_scaling_configuration = {
-    min_capacity = 2
-    max_capacity = 10
+  serverless_v2_cluster_identifier = var.cluster_id
+
+  serverless_v2_scaling_configuration {
+    auto_pause               = true
+    max_capacity             = 8
+    min_capacity             = 2
+    seconds_until_auto_pause = 300
+    timeout_action           = "ForceApplyCapacityChange"
   }
-  
   tags = {
     Environment = var.environment
   }
