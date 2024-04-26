@@ -8,7 +8,6 @@ region = "ap-south-1"
 
 environment  = "Dev"
 cluster_id   = "dev-cluster"
-region       = "ap-south-1"
 auto_pause   = "true"
 max_capacity = "16"
 min_capacity = "1"
