@@ -16,12 +16,14 @@
 
 
 #------------------------------------------------------------------------
-resource "aws_rds_cluster_instance" "postgresql_serverless" {
+resource "aws_rds_cluster" "postgresql_serverless" {
   cluster_identifier             = var.cluster_id
-  instance_identifier            = "${var.cluster_id}-instance"
-  instance_class                 = "db.r5.large"  # Adjust instance class as per your requirements
   engine                         = "aurora-postgresql"
+  engine_mode                    = "provisioned"
   engine_version                 = "15.2"  # Adjust engine version as per your requirements
+  database_name                  = "testdatabaseinfra"
+  master_username                = "mydb"
+  master_password                = "testmedude"
   publicly_accessible            = false
   auto_minor_version_upgrade     = false
   apply_immediately              = true  # Apply changes immediately
@@ -36,6 +38,17 @@ resource "aws_rds_cluster_instance" "postgresql_serverless" {
   
   tags                           = { Environment = var.environment }
 }
+
+resource "aws_rds_cluster_instance" "postgresql_instance" {
+  count                          = "1"
+  identifier                     = "${var.cluster_id}-instance-${count.index}"
+  cluster_identifier             = aws_rds_cluster.postgresql_serverless.id
+  instance_class                 = "db.r5.large"  # Adjust instance class as per your requirements
+  engine                         = "aurora-postgresql"
+  publicly_accessible            = false
+  tags                           = { Environment = var.environment }
+}
+
 
 
 
