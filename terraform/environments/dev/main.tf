@@ -15,9 +15,5 @@ module "postgres" {
   environment = var.environment
   cluster_id  = var.cluster_id
   region      = var.region
-  auto_pause = var.auto_pause
-  max_capacity = var.max_capacity
-  min_capacity = var.min_capacity
-  seconds_until_auto_pause = var.seconds_until_auto_pause
 }
 
