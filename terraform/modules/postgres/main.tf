@@ -30,6 +30,13 @@ resource "aws_rds_cluster" "postgresql_serverless" {
 
   # Specify existing VPC and subnets
   vpc_security_group_ids         = ["sg-005e6c9357838f2e7"]
+  deletion_protection            = false
+  apply_immediately              = true
+
+  enabled_cloudwatch_logs_exports = [ "PostgreSQL" ]
+  db_parameter_group_name        = "default.aurora-postgresql15"
+
+  iam_database_authentication_enabled = true
 
   tags                           = { Environment = var.environment }
 }
@@ -41,6 +48,9 @@ resource "aws_rds_cluster_instance" "postgresql_instance" {
   instance_class                 = "db.r5.large"  # Adjust instance class as per your requirements
   engine                         = "aurora-postgresql"
   publicly_accessible            = false
+  performance_insights_enabled      = true
+  performance_insights_retention_period = 7  # Adjust retention period as needed
+  db_parameter_group_name        = "default.aurora-postgresql15"
   tags                           = { Environment = var.environment }
 }
 
