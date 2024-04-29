@@ -19,6 +19,15 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   skip_final_snapshot            = true  # Since deletion_protection is set to false, skipping final snapshot is recommended
   final_snapshot_identifier      = "${var.cluster_id}-final-snapshot"
   db_cluster_parameter_group_name = "default.aurora-postgresql15"
+  iam_database_authentication_enabled = true
+  storage_encrypted              = true
+  capacity_provider_settings {
+    name                          = "FARGATE_SPOT"
+    auto_scaling                  = true
+    maximum_scaling_step_size     = 16  # Set maximum capacity to 16 GiB
+    minimum_scaling_step_size     = 1   # Set minimum capacity to 1 GiB
+    target_capacity               = 2
+  }
   tags                           = { Environment = var.environment }
 }
 
