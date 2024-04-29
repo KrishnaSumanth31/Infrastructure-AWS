@@ -28,7 +28,7 @@ resource "aws_rds_cluster_instance" "postgresql_instance" {
   count                          = 1  
   identifier                     = "${var.cluster_id}-instance-${count.index}"
   cluster_identifier             = aws_rds_cluster.postgresql_serverless.id
-  #instance_class                 = "db.r5.large"  # Adjust instance class as per your requirements
+  instance_class                 = "db.t3.small"  # Adjust instance class as per your requirements
   engine                         = "aurora-postgresql"
   publicly_accessible            = false
   performance_insights_enabled      = true
