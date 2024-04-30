@@ -59,7 +59,7 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   engine_version                 = "15.2"  # Adjust engine version as per your requirements
   database_name                  = "testdatabaseinfra"
   master_username                = "mydevdb"
-  master_password                = "Test@me"
+  master_password                = "Test@me123"
   # Serverless V2 configuration
   db_subnet_group_name           = "default"
 
