@@ -40,17 +40,17 @@
 
 
 #------------------------------------------------------------------------
-resource "aws_secretsmanager_secret" "database_credentials" {
-  name = "database_credentials_devlop"
-}
+#resource "aws_secretsmanager_secret" "database_credentials" {
+#  name = "database_credentials_devlop"
+#}
 
-resource "aws_secretsmanager_secret_version" "database_credentials_version" {
-  secret_id = aws_secretsmanager_secret.database_credentials.id
-  secret_string = jsonencode({
+#resource "aws_secretsmanager_secret_version" "database_credentials_version" {
+#  secret_id = aws_secretsmanager_secret.database_credentials.id
+#  secret_string = jsonencode({
     #username = "mydevdb",
-    password = "Test@me",
-  })
-}
+    #password = "Test@me",
+#  })
+#}
 
 resource "aws_rds_cluster" "postgresql_serverless" {
   cluster_identifier             = var.cluster_id
@@ -59,8 +59,7 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   engine_version                 = "15.2"  # Adjust engine version as per your requirements
   database_name                  = "testdatabaseinfra"
   master_username                = "mydevdb"
-  master_password                = aws_secretsmanager_secret_version.database_credentials_version.secret_string
-
+  master_password                = "Test@me"
   # Serverless V2 configuration
   db_subnet_group_name           = "default"
 
@@ -75,6 +74,9 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   db_cluster_parameter_group_name = "default.aurora-postgresql15"
   iam_database_authentication_enabled = true
   storage_encrypted              = true
+  
+  # Set multizone to "NO"
+  multi_az                       = false
   tags                           = { Environment = var.environment }
 }
 
