@@ -41,7 +41,7 @@
 
 #------------------------------------------------------------------------
 resource "aws_secretsmanager_secret" "database_credentials" {
-  name = "database_credentials_dev"
+  name = "database_credentials_devdemo"
 }
 
 resource "aws_secretsmanager_secret_version" "database_credentials_version" {
