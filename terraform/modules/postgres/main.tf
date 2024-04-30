@@ -59,7 +59,7 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   engine_version                 = "15.2"  # Adjust engine version as per your requirements
   database_name                  = "testdatabaseinfra"
   master_username                = "mydevdb"
-  master_password                = "testmedude"
+  #master_password                = "testmedude"
   # Serverless V2 configuration
   db_subnet_group_name           = "default"
 
@@ -81,7 +81,7 @@ resource "aws_rds_cluster_instance" "postgresql_instance" {
   count                          = 1  
   identifier                     = "${var.cluster_id}-instance-${count.index}"
   cluster_identifier             = aws_rds_cluster.postgresql_serverless.id
-  instance_class                 = "db.r5.large"  # Adjust instance class as per your requirements
+  instance_class                 = "db.r6g.large"  # Adjust instance class as per your requirements
   engine                         = "aurora-postgresql"
   publicly_accessible            = false
   performance_insights_enabled   = true
