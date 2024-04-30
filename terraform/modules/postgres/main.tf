@@ -47,7 +47,7 @@ resource "aws_secretsmanager_secret" "database_credentials" {
 resource "aws_secretsmanager_secret_version" "database_credentials_version" {
   secret_id = aws_secretsmanager_secret.database_credentials.id
   secret_string = jsonencode({
-    username = "mydevdb",
+    #username = "mydevdb",
     password = "testmedude",
   })
 }
@@ -58,7 +58,7 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   engine_mode                    = "provisioned"
   engine_version                 = "15.2"  # Adjust engine version as per your requirements
   database_name                  = "testdatabaseinfra"
-  master_username                = aws_secretsmanager_secret_version.database_credentials_version.secret_string
+  master_username                = "mydevdb"
   master_password                = aws_secretsmanager_secret_version.database_credentials_version.secret_string
 
   # Serverless V2 configuration
