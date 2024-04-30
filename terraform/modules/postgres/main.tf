@@ -74,9 +74,6 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   db_cluster_parameter_group_name = "default.aurora-postgresql15"
   iam_database_authentication_enabled = true
   storage_encrypted              = true
-  
-  # Set multizone to "NO"
-  multi_az                       = false
   tags                           = { Environment = var.environment }
 }
 
