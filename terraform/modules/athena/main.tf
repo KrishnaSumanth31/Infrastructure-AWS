@@ -41,6 +41,6 @@ resource "aws_athena_workgroup" "example" {
 output "athena_configuration" {
   value = {
     "Workgroup"    = aws_athena_workgroup.example.name
-    "ResultsBucket" = aws_s3_bucket.athena_results_bucket_ganesh_test.bucket
+    "ResultsBucket" = aws_s3_bucket.athena_results_bucket.bucket
   }
 }
