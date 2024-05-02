@@ -59,7 +59,7 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   engine_version                 = "15.2"  # Adjust engine version as per your requirements
   database_name                  = "testdatabaseinfra"
   master_username                = "devuser"
-#  master_password                = aws_secretsmanager_secret_version.rds_credentials_version.secret_string["password"]
+  master_password                = random_password.rds_password.result
   # Serverless V2 configuration
   db_subnet_group_name           = "default"
 
@@ -93,9 +93,10 @@ output "rds_cluster_endpoint" {
   value = aws_rds_cluster.postgresql_serverless.endpoint
 }
 
-resource "random_password" "master" {
-  length  = 20
-  special = false
+resource "random_password" "rds_password" {
+  length           = 16
+  special          = true
+  override_special = "_%@"
 }
 
 
