@@ -12,3 +12,8 @@ cluster_id   = "dev-cluster"
 username = "hello_dev"
 password = "May@2024"
 port = "5032"
+description = "Access to Postgres DB secrets"
+tags         = {
+  Environment = "Develop"
+  Application = "MyAppWorking"
+}
