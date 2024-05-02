@@ -8,27 +8,25 @@ resource "aws_iam_role" "athena_role" {
   name = "athena_role"
   
   assume_role_policy = jsonencode({
-    "Version" : "2012-10-17",
-    "Statement" : [
-      {
-        "Effect" : "Allow",
-        "Principal" : {
-          "Service" : "athena.amazonaws.com"
-        },
-        "Action" : "sts:AssumeRole"
-      }
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "athena:*"
+            ],
+            "Resource": [
+                "*"
+            ]
+        }
     ]
-  })
+})
 }
 
-# Attach necessary policies to the role
-resource "aws_iam_role_policy_attachment" "athena_policy" {
-  role       = aws_iam_role.athena_role.name
-  policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonAthenaFullAccess"
-}
+
 
 # Create S3 bucket for query results
-resource "aws_s3_bucket" "athena_results_bucket" {
+resource "aws_s3_bucket" "athena_results_bucket_ganesh_test" {
   bucket = "athena-query-results-bucket"
   acl    = "private"
 }
