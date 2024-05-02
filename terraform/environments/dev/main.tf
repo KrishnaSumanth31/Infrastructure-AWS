@@ -26,4 +26,6 @@ module "secret_manager" {
   username = var.username
   password = var.password
   port = var.port
+  description = var.description
+  tags        = var.tags
 }
