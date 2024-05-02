@@ -46,6 +46,7 @@ resource "aws_secretsmanager_secret" "database_credentials" {
     username = "mydevdb",
     password = "Test@me"
   })
+}
 
 resource "aws_secretsmanager_secret_version" "database_credentials_version" {
   secret_id     = aws_secretsmanager_secret.database_credentials.id
