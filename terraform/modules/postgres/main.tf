@@ -40,17 +40,19 @@
 
 
 #------------------------------------------------------------------------
-#resource "aws_secretsmanager_secret" "database_credentials" {
-#  name = "database_credentials_devlop"
-#}
+resource "aws_secretsmanager_secret" "database_credentials" {
+  name = "database_credentials_devlop"
+  kms_key_id = "aws/secretsmanager"
+  secret_string = jsonencode({
+    username = "mydevdb",
+    password = "Test@me"
+  })
+}
 
-#resource "aws_secretsmanager_secret_version" "database_credentials_version" {
-#  secret_id = aws_secretsmanager_secret.database_credentials.id
-#  secret_string = jsonencode({
-#    username = "mydevdb",
-#    password = "Test@me"
-#  })
-#}
+resource "aws_secretsmanager_secret_version" "database_credentials_version" {
+  secret_id     = aws_secretsmanager_secret.database_credentials.id
+  secret_string = aws_secretsmanager_secret.database_credentials.secret_string
+}}
 
 resource "aws_rds_cluster" "postgresql_serverless" {
   cluster_identifier             = var.cluster_id
@@ -58,8 +60,8 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   engine_mode                    = "provisioned"
   engine_version                 = "15.2"  # Adjust engine version as per your requirements
   database_name                  = "testdatabaseinfra"
-  master_username                = "devuser"
-  master_password                = random_password.rds_password.result
+  master_username                = aws_secretsmanager_secret.database_credentials.secret_string.username
+  master_password                = aws_secretsmanager_secret.database_credentials.secret_string.password
   # Serverless V2 configuration
   db_subnet_group_name           = "default"
 
@@ -93,11 +95,6 @@ output "rds_cluster_endpoint" {
   value = aws_rds_cluster.postgresql_serverless.endpoint
 }
 
-resource "random_password" "rds_password" {
-  length           = 16
-  special          = true
-  override_special = "_%@"
-}
 
 
 
