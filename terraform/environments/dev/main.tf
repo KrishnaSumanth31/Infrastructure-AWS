@@ -19,4 +19,5 @@ provider "aws" {
 
 module "athena" {
   source      = "../../modules/athena"
+}
 
