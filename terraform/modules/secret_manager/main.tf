@@ -15,6 +15,4 @@ resource "aws_secretsmanager_secret_version" "postgres_db_secrets_version" {
     password = var.password,
     port     = var.port
   })
-  description = var.description
-  tags        = var.tags
 }
