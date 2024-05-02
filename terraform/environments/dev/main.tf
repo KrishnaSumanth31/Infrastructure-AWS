@@ -10,10 +10,13 @@ provider "aws" {
 #}
 
 
-module "postgres" {
-  source      = "../../modules/postgres"
-  environment = var.environment
-  cluster_id  = var.cluster_id
-  region      = var.region
-}
+#module "postgres" {
+#  source      = "../../modules/postgres"
+#  environment = var.environment
+#  cluster_id  = var.cluster_id
+#  region      = var.region
+#}
+
+module "athena" {
+  source      = "../../modules/athena"
 
