@@ -42,13 +42,12 @@
 #------------------------------------------------------------------------
 resource "aws_secretsmanager_secret" "database_credentials" {
   name = "database_credentials_devlop"
-  username = "mydevdb",
+  username = "mydevdb"
   password = "Test@me"
   }
 
 resource "aws_secretsmanager_secret_version" "database_credentials_version" {
   secret_id     = aws_secretsmanager_secret.database_credentials.id
-  secret_string = aws_secretsmanager_secret.database_credentials.secret_string
 }
 
 resource "aws_rds_cluster" "postgresql_serverless" {
