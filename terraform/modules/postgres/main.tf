@@ -42,9 +42,10 @@
 #------------------------------------------------------------------------
 resource "aws_secretsmanager_secret" "database_credentials" {
   name = "database_credentials_devlop"
-  username = "mydevdb"
-  password = "Test@me"
-  }
+  SecretString = jsonencode({
+    username = "mydevdb",
+    password = "Test@me"
+  })
 
 resource "aws_secretsmanager_secret_version" "database_credentials_version" {
   secret_id     = aws_secretsmanager_secret.database_credentials.id
