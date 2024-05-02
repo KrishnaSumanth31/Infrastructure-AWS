@@ -14,10 +14,8 @@ resource "aws_secretsmanager_secret" "database_credentials" {
   })
 
   # Enable rotation with a rotation lambda
-  rotation_lambda_config {
-    rotation_rules {
-      automatically_after_days = 30
-    }
+  rotation_rules {
+    automatically_after_days = 30
   }
 }
 
