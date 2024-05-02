@@ -1,15 +1,16 @@
 provider "aws" {
-  region = "us-west-2"  # Set your desired AWS region
+  region = "ap-south-1"  # Set your desired AWS region
 }
 
-resource "aws_secretsmanager_secret" "example_secret" {
-  name = "example_secret"
+resource "aws_secretsmanager_secret" "postgres_db_secrets" {
+  name = "postgres_db_secrets"
 }
 
-resource "aws_secretsmanager_secret_version" "example_secret_version" {
-  secret_id     = aws_secretsmanager_secret.example_secret.id
+resource "aws_secretsmanager_secret_version" "postgres_db_secrets_version" {
+  secret_id     = aws_secretsmanager_secret.postgres_db_secrets.id
   secret_string = jsonencode({
     username = var.username,
-    password = var.password
+    password = var.password,
+    port     = var.port
   })
 }
