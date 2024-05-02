@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 resource "aws_secretsmanager_secret" "postgres_db_secrets" {
-  name = "postgres_db_secrets"
+  name = "postgres_db_secrets_dev"
   description = var.description
   tags        = var.tags
 }
