@@ -1,26 +1,3 @@
-variable "region" {
-  description = "The AWS region"
-  type        = string
-}
-
-variable "bucket_name_artifact" {
-  description = "The name of the artifact bucket"
-  type        = string
-}
-
-variable "bucket_name_raw" {
-  description = "The name of the raw bucket"
-  type        = string
-}
-
-variable "environment" {
-  description = "The environment name"
-}
-
-variable "cluster_id" {
-  description = "The identifier for the DB cluster"
-}
-
 variable "username" {
   description = "The username for the secret"
   type        = string
@@ -34,4 +11,14 @@ variable "password" {
 variable "port" {
   description = "The port for the DB"
   type        = string
+}
+
+variable "description" {
+  description = "The description for secrets"
+  type        = string
+}
+
+variable "tags" {
+  description = "A map of tags to assign to the secret"
+  type        = map(string)
 }
