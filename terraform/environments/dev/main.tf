@@ -10,14 +10,20 @@ provider "aws" {
 #}
 
 
-module "postgres" {
-  source      = "../../modules/postgres"
-  environment = var.environment
-  cluster_id  = var.cluster_id
-  region      = var.region
-}
+#module "postgres" {
+#  source      = "../../modules/postgres"
+#  environment = var.environment
+#  cluster_id  = var.cluster_id
+#  region      = var.region
+#}
 
 #module "athena" {
 #  source      = "../../modules/athena"
 #}
 
+module "secret_manager" {
+  source      = "../../modules/secret_manager"
+  username = var.username
+  password = var.password
+  port = var.port
+}
