@@ -26,7 +26,7 @@ resource "aws_iam_role" "athena_role" {
 
 
 # Create S3 bucket for query results
-resource "aws_s3_bucket" "athena_results_bucket_ganesh_test" {
+resource "aws_s3_bucket" "athena_results_bucket" {
   bucket = "athena-query-results-bucket-test-ganesh-np"
   acl    = "private"
 }
