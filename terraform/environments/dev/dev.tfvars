@@ -8,3 +8,7 @@ region = "ap-south-1"
 
 environment  = "Dev"
 cluster_id   = "dev-cluster"
+
+username = "hello_dev"
+password = "May@2024"
+port = "5032"
