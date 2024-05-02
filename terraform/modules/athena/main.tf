@@ -27,7 +27,7 @@ resource "aws_iam_role" "athena_role" {
 
 # Create S3 bucket for query results
 resource "aws_s3_bucket" "athena_results_bucket_ganesh_test" {
-  bucket = "athena-query-results-bucket"
+  bucket = "athena-query-results-bucket-test-ganesh-np"
   acl    = "private"
 }
 
@@ -41,6 +41,6 @@ resource "aws_athena_workgroup" "example" {
 output "athena_configuration" {
   value = {
     "Workgroup"    = aws_athena_workgroup.example.name
-    "ResultsBucket" = aws_s3_bucket.athena_results_bucket.bucket
+    "ResultsBucket" = aws_s3_bucket.athena_results_bucket_ganesh_test.bucket
   }
 }
