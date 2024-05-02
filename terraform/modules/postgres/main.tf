@@ -52,7 +52,7 @@ resource "aws_secretsmanager_secret" "database_credentials" {
 resource "aws_secretsmanager_secret_version" "database_credentials_version" {
   secret_id     = aws_secretsmanager_secret.database_credentials.id
   secret_string = aws_secretsmanager_secret.database_credentials.secret_string
-}}
+}
 
 resource "aws_rds_cluster" "postgresql_serverless" {
   cluster_identifier             = var.cluster_id
