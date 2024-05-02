@@ -40,17 +40,17 @@
 
 
 #------------------------------------------------------------------------
-#resource "aws_secretsmanager_secret" "database_credentials" {
-#  name = "database_credentials_devlop"
-#}
+resource "aws_secretsmanager_secret" "database_credentials" {
+  name = "database_credentials_devlop"
+}
 
-#resource "aws_secretsmanager_secret_version" "database_credentials_version" {
-#  secret_id = aws_secretsmanager_secret.database_credentials.id
-#  secret_string = jsonencode({
-    #username = "mydevdb",
-    #password = "Test@me",
-#  })
-#}
+resource "aws_secretsmanager_secret_version" "database_credentials_version" {
+  secret_id = aws_secretsmanager_secret.database_credentials.id
+  secret_string = jsonencode({
+    username = "mydevdb",
+    password = "Test@me"
+  })
+}
 
 resource "aws_rds_cluster" "postgresql_serverless" {
   cluster_identifier             = var.cluster_id
@@ -58,8 +58,8 @@ resource "aws_rds_cluster" "postgresql_serverless" {
   engine_mode                    = "provisioned"
   engine_version                 = "15.2"  # Adjust engine version as per your requirements
   database_name                  = "testdatabaseinfra"
-  master_username                = "mydevdb"
-  master_password                = "Placeholder_Password" # Provide a placeholder password
+  master_username                = aws_secretsmanager_secret_version.database_credentials_version.secret_string["username"]
+  master_password                = aws_secretsmanager_secret_version.database_credentials_version.secret_string["password"]
   # Serverless V2 configuration
   db_subnet_group_name           = "default"
 
@@ -81,7 +81,7 @@ resource "aws_rds_cluster_instance" "postgresql_instance" {
   count                          = 1  
   identifier                     = "${var.cluster_id}-instance-${count.index}"
   cluster_identifier             = aws_rds_cluster.postgresql_serverless.id
-  instance_class                 = "db.r6g.large"  # Adjust instance class as per your requirements
+  instance_class                 = "db.r5.large"  # Adjust instance class as per your requirements
   engine                         = "aurora-postgresql"
   publicly_accessible            = false
   performance_insights_enabled   = true
