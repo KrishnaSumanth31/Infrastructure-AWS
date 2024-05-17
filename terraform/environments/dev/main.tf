@@ -21,11 +21,15 @@ provider "aws" {
 #  source      = "../../modules/athena"
 #}
 
-module "secret_manager" {
-  source      = "../../modules/secret_manager"
-  username = var.username
-  password = var.password
-  port = var.port
-  description = var.description
-  tags        = var.tags
+#module "secret_manager" {
+#  source      = "../../modules/secret_manager"
+#  username = var.username
+#  password = var.password
+#  port = var.port
+#  description = var.description
+#  tags        = var.tags
+#}
+
+module "iam_role" {
+  source      = "../../modules/iam_role"
 }
