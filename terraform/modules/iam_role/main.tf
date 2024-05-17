@@ -33,12 +33,12 @@ resource "aws_iam_role_policy_attachment" "glue_service_role" {
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceRole"
 }
 
-resource "aws_iam_role_policy_attachment" "glue_service_role" {
+resource "aws_iam_role_policy_attachment" "glue_service_notebook_role" {
   role       = aws_iam_role.glue_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSGlueServiceNotebookRole"
 }
 
-resource "aws_iam_role_policy_attachment" "glue_service_role" {
+resource "aws_iam_role_policy_attachment" "glue_secretsmanager_role" {
   role       = aws_iam_role.glue_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/SecretsManagerReadWrite"
 }
