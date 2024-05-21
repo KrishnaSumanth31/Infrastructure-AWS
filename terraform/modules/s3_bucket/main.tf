@@ -14,31 +14,34 @@ resource "aws_s3_bucket" "artifact_bucket" {
 resource "aws_s3_bucket" "raw_bucket" {
   bucket = var.bucket_name_raw
   acl    = "private"
+}
 
-  lifecycle_rule {
-    enabled = true
-
-    transition {
-      days          = 30
-      storage_class = "STANDARD_IA"
+data "aws_iam_policy_document" "https_only" {
+  statement {
+    actions   = ["s3:*"]
+    effect    = "Deny"
+    resources = [
+      "arn:aws:s3:::${aws_s3_bucket.artifact_bucket.bucket}/*",
+      "arn:aws:s3:::${aws_s3_bucket.raw_bucket.bucket}/*"
+    ]
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
     }
-
-    transition {
-      days          = 60
-      storage_class = "GLACIER"
-    }
-
-    transition {
-      days          = 150
-      storage_class = "DEEP_ARCHIVE"
-    }
-
-    expiration {
-      days = 365
+    condition {
+      test     = "Bool"
+      variable = "aws:SecureTransport"
+      values   = ["false"]
     }
   }
+}
 
-  object_lock_configuration {
-    object_lock_enabled = "Enabled"
-  }
+resource "aws_s3_bucket_policy" "artifact_bucket_policy" {
+  bucket = aws_s3_bucket.artifact_bucket.id
+  policy = data.aws_iam_policy_document.https_only.json
+}
+
+resource "aws_s3_bucket_policy" "raw_bucket_policy" {
+  bucket = aws_s3_bucket.raw_bucket.id
+  policy = data.aws_iam_policy_document.https_only.json
 }
