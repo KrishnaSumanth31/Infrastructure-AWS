@@ -97,10 +97,6 @@ resource "aws_s3_bucket_policy" "artifact_bucket_policy_https" {
   policy = data.aws_iam_policy_document.https_only_policy.json
 }
 
-resource "aws_s3_bucket_policy" "artifact_bucket_policy" {
-  bucket = aws_s3_bucket.artifact_bucket.id
-  policy = data.aws_iam_policy_document.allow_other_account_policy.json
-}
 
 resource "aws_s3_bucket_policy" "raw_bucket_policy" {
   bucket = aws_s3_bucket.raw_bucket.id
