@@ -16,12 +16,32 @@ resource "aws_s3_bucket" "raw_bucket" {
   acl    = "private"
 }
 
-data "aws_iam_policy_document" "https_only" {
+data "aws_iam_policy_document" "artifact_bucket_policy" {
   statement {
     actions   = ["s3:*"]
     effect    = "Deny"
     resources = [
-      "arn:aws:s3:::${aws_s3_bucket.artifact_bucket.bucket}/*",
+      "arn:aws:s3:::${aws_s3_bucket.artifact_bucket.bucket}",
+      "arn:aws:s3:::${aws_s3_bucket.artifact_bucket.bucket}/*"
+    ]
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+    condition {
+      test     = "Bool"
+      variable = "aws:SecureTransport"
+      values   = ["false"]
+    }
+  }
+}
+
+data "aws_iam_policy_document" "raw_bucket_policy" {
+  statement {
+    actions   = ["s3:*"]
+    effect    = "Deny"
+    resources = [
+      "arn:aws:s3:::${aws_s3_bucket.raw_bucket.bucket}",
       "arn:aws:s3:::${aws_s3_bucket.raw_bucket.bucket}/*"
     ]
     principals {
@@ -38,10 +58,11 @@ data "aws_iam_policy_document" "https_only" {
 
 resource "aws_s3_bucket_policy" "artifact_bucket_policy" {
   bucket = aws_s3_bucket.artifact_bucket.id
-  policy = data.aws_iam_policy_document.https_only.json
+  policy = data.aws_iam_policy_document.artifact_bucket_policy.json
 }
 
 resource "aws_s3_bucket_policy" "raw_bucket_policy" {
   bucket = aws_s3_bucket.raw_bucket.id
-  policy = data.aws_iam_policy_document.https_only.json
+  policy = data.aws_iam_policy_document.raw_bucket_policy.json
 }
+
