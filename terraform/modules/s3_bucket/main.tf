@@ -22,9 +22,7 @@ data "aws_iam_policy_document" "https_only_policy" {
     effect    = "Deny"
     resources = [
       "arn:aws:s3:::${aws_s3_bucket.artifact_bucket.bucket}",
-      "arn:aws:s3:::${aws_s3_bucket.artifact_bucket.bucket}/*",
-      "arn:aws:s3:::${aws_s3_bucket.raw_bucket.bucket}",
-      "arn:aws:s3:::${aws_s3_bucket.raw_bucket.bucket}/*"
+      "arn:aws:s3:::${aws_s3_bucket.artifact_bucket.bucket}/*"
     ]
     principals {
       type        = "AWS"
@@ -60,8 +58,6 @@ data "aws_iam_policy_document" "combined_policy" {
     actions   = ["s3:*"]
     effect    = "Deny"
     resources = [
-      "arn:aws:s3:::${aws_s3_bucket.artifact_bucket.bucket}",
-      "arn:aws:s3:::${aws_s3_bucket.artifact_bucket.bucket}/*",
       "arn:aws:s3:::${aws_s3_bucket.raw_bucket.bucket}",
       "arn:aws:s3:::${aws_s3_bucket.raw_bucket.bucket}/*"
     ]
@@ -80,8 +76,6 @@ data "aws_iam_policy_document" "combined_policy" {
     actions   = ["s3:*"]
     effect    = "Allow"
     resources = [
-      "arn:aws:s3:::${aws_s3_bucket.artifact_bucket.bucket}",
-      "arn:aws:s3:::${aws_s3_bucket.artifact_bucket.bucket}/*",
       "arn:aws:s3:::${aws_s3_bucket.raw_bucket.bucket}",
       "arn:aws:s3:::${aws_s3_bucket.raw_bucket.bucket}/*"
     ]
