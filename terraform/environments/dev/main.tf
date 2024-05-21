@@ -30,6 +30,6 @@ module "s3_bucket" {
 #  tags        = var.tags
 #}
 
-module "iam_role" {
-  source      = "../../modules/iam_role"
-}
+#module "iam_role" {
+#  source      = "../../modules/iam_role"
+#}
