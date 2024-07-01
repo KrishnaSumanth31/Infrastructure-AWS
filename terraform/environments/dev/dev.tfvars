@@ -9,7 +9,11 @@ region = "ap-south-1"
 environment  = "Dev"
 cluster_id   = "dev-cluster"
 
-username = "-----BEGIN RSA PRIVATE KEY-----\nMIIEpAIBAAKCAQEA7uWmCpW3c6F8E7h9...\n...+3bBSsG2Gie4XlXjYdUQIDAQABAoIBAQC...\nmytestpassword..lmhgs"
+username = ["-----BEGIN RSA PRIVATE KEY-----",
+"MIIEpAIBAAKCAQEA7uWmCpW3c6F8E7h9...",
+...+3bBSsG2Gie4XlXjYdUQIDAQABAoIBAQC...",
+mytestpassword..lmhgs"
+]
 password = "May@2024"
 port = "5032"
 description = "Access to Postgres DB secrets"
