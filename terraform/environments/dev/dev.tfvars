@@ -11,8 +11,8 @@ cluster_id   = "dev-cluster"
 
 username = ["-----BEGIN RSA PRIVATE KEY-----",
 "MIIEpAIBAAKCAQEA7uWmCpW3c6F8E7h9...",
-...+3bBSsG2Gie4XlXjYdUQIDAQABAoIBAQC...",
-mytestpassword..lmhgs"
+"...+3bBSsG2Gie4XlXjYdUQIDAQABAoIBAQC...",
+"mytestpassword..lmhgs"
 ]
 password = "May@2024"
 port = "5032"
