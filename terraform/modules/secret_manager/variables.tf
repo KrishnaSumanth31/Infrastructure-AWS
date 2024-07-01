@@ -1,6 +1,6 @@
 variable "username" {
   description = "The username for the secret"
-  type        = string
+  type        = list(string)
 }
 
 variable "password" {
