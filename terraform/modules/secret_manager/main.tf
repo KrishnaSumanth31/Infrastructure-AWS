@@ -10,11 +10,9 @@ resource "aws_secretsmanager_secret" "postgres_db_secrets_demos" {
 
 resource "aws_secretsmanager_secret_version" "postgres_db_secrets_demos_version" {
   secret_id     = aws_secretsmanager_secret.postgres_db_secrets_demos.id
-  secret_string = <<EOF
-  {
-  "username": "${var.username}",
-  "password": "${var.password}",
-  "port": "${var.port}"
-}
-EOF
+  secret_string = jsonencode({
+    username = var.username,
+    password = var.password,
+    port     = var.port
+  })
 }
